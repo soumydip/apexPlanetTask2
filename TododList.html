@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>To-Do List</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f0f4f8;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .contener {
+      background-color: #fff;
+      width: 400px;
+      height: 500px; /* Fixed height */
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+      display: flex;
+      flex-direction: column;
+    }
+
+    h2 {
+      color: #333;
+      text-align: center;
+    }
+
+    .inputFild {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+
+    #task {
+      flex: 1;
+      padding: 10px;
+      font-size: 18px;
+      border-radius: 15px;
+      border: 1px solid #ddd;
+      outline: none;
+    }
+
+    #submit {
+      padding: 10px 20px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 15px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    #submit:hover {
+      background-color: #45a049;
+    }
+
+    .listItem {
+      flex: 1;
+      overflow-y: auto; /* Scroll hobe ekhane */
+      margin-top: 10px;
+      padding: 0;
+      list-style-type: none;
+    }
+
+    .taskItem {
+      background-color: #f9f9f9;
+      padding: 15px;
+      margin: 10px 0;
+      border-radius: 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .taskItem button {
+      background-color: #ff4d4d;
+      color: white;
+      border: none;
+      padding: 5px 10px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .taskItem button:hover {
+      background-color: #e60000;
+    }
+  </style>
+</head>
+<body>
+  <div class="contener">
+    <h2>To-Do List</h2>
+    <div class="inputFild">
+      <input type="text" placeholder="Enter a new task" id="task">
+      <button type="submit" id="submit">Add Task</button>
+    </div>
+    <div class="listItem"></div>
+  </div>
+
+  <script>
+    document.getElementById("submit").addEventListener("click", addItem);
+
+    function addItem() {
+      let task = document.getElementById("task").value;
+      if (task) {
+        let listItem = document.getElementsByClassName("listItem")[0];
+
+        let newItem = document.createElement("div");
+        newItem.className = "taskItem";
+
+        let taskText = document.createElement("span");
+        taskText.textContent = task;
+
+        let deleteItem = document.createElement("button");
+        deleteItem.innerText = "Delete";
+        deleteItem.onclick = function() {
+          listItem.removeChild(newItem);
+        };
+
+        newItem.appendChild(taskText);
+        newItem.appendChild(deleteItem);
+        listItem.appendChild(newItem);
+
+        document.getElementById("task").value = "";
+      }
+    }
+  </script>
+</body>
+</html>
